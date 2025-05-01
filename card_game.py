@@ -28,27 +28,55 @@ print("Your cards are", player_cards_2)
 for s in player_cards_2:
     split_player_cards_2=s.split(",")
 res_2=[]
-for val in card_stack:
-    if val not in player_cards_2:
-        res.append(val)
+for val_2 in card_stack:
+    if val_2 not in player_cards_2:
+        res.append(val_2)
 print(res_2)
 
 #randomly decided player starts the game 
 players= ["Player 1", "Player 2"]
 player_choice= random.choice(players)
+print(player_choice, "will start the round")
 
-if player_choice == "Player 1":
-    card_selection = input("What card would you like to put down first?")
-    player_cards.pop(card_selection)
-    print("Player 2 has put down", player_cards_2[0])
-    player_cards_2.pop(0)
-else:
-    print("Player 2 has put down", player_cards_2[0])
-    player_cards_2.pop(0)
+#main gameplay
+while len(player_cards) > 4:
+    #card stack must be at least 4 to maintain gameplay
+    if player_choice == "Player 1":
+        card_selection = input("What card would you like to put down?")
+        player_cards.pop(card_selection)
+        print("Player 2 has put down", player_cards_2[0])
+        player_cards_2.pop(0)
 
+    else:
+        print("Player 2 has put down", player_cards_2[0])
+        #obtaining information about the suite
+        for c in player_cards_2[0]:
+            determining_val = c.split(" ")
+        card_suit= str(determining_val[2])
+        #asking player 1 what they will put down
+        card_selection= input("What card will you put down:")
+        for d in card_selection:
+            determining_val_2= d.split(" ")
+        card_suite_2= str(determining_val_2[2])
+        #obtaining information about suite
+        if card_suite_2 != card_suit: 
+             #how do I double check if the value of the card is great enough?
+             if determining_val_2[0]<determining_val[0]:
+                print("you lost this round")
+                player_cards.pop(card_selection)
+                player_cards_2.pop(0)
+        else:
+                print("congrats you won the round!")
+
+
+
+# have last word of string be found, if the string cannot be found in the player input, have the number be crosschecked, if the number value is greater than first string (1,2,3, etc) 
+#the player gets a point for the round
 
 
 #random card selected to be shown to other player
+
+
 
 #what happens if player is down to 4 cards?
 # can happen twice in the game
